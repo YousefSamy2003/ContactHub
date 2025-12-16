@@ -1,7 +1,10 @@
 :root {
   --main-color: #6432f9;
-  --color-user:#216FFE ;
+  --color-user: #216ffe;
   --hover-color: #62627870;
+  --people-color: #1a66fe;
+  --fav-color: #ff9200;
+  --emerg-color: #ec0024;
   --tw-shadow-color: color-mix(
     in oklab,
     oklch(60.6% 0.25 292.717) 30%,
@@ -13,6 +16,11 @@
 
 body {
   font-family: "Inter", sans-serif;
+}
+input:focus {
+  outline: none !important;
+  border-color: #7c3aed !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
 }
 
 .button-icon {
@@ -62,13 +70,10 @@ nav .right-nav .for-user-image {
   height: 40px;
 }
 
-
-
 .img-box span {
-    width: 100px;
-    height: 100px;
-    background-color: var(--color-user);
-    
+  width: 100px;
+  height: 100px;
+  background-color: var(--color-user);
 }
 .change-photo-btn {
   display: inline-flex;
@@ -84,8 +89,147 @@ nav .right-nav .for-user-image {
   border: 1px solid #e2e8f0;
 }
 
-
 textarea {
-resize: none !important;
-height: 70px;
+  resize: none !important;
+  height: 70px;
+}
+
+section {
+  padding-block: 50px;
+  background-color: #f8fafc;
+  height: 100vh;
+}
+
+.about-all-list {
+  .box-design {
+    background-color: #ffffff;
+    box-shadow: 0px 1px rgba(128, 128, 128, 0.224);
+    transition: all 0.2s;
+    &:hover {
+      box-shadow: 0px 2px rgba(128, 128, 128, 0.224);
+      transform: translateY(-2px);
+    }
+  }
+  .icon {
+    width: 45px;
+    height: 45px;
+  }
+  .total {
+    font-size: 12px;
+    font-weight: 500;
+    color: #4a5568;
+  }
+}
+.card-contant {
+  background-color: #ffffff;
+  box-shadow: 0px 1px rgba(128, 128, 128, 0.224);
+  transition: all 0.2s;
+  &:hover {
+    box-shadow: 0px 2px rgba(128, 128, 128, 0.224);
+  }
+}
+
+.icon-fav-emerg {
+  background-color: #7c3aed; /* البنفسجي */
+  width: 50px;
+  height: 50px;
+  position: relative;
+  border-radius: 12px;
+}
+
+.icon-fav-emerg .fav-icon {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #fbbf24; /* برتقالي/ذهبي */
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.icon-fav-emerg .fav-icon i {
+  font-size: 11px;
+  color: #fff;
+}
+
+.icon-fav-emerg .emerg-icon {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  background-color: #ef4444; /* أحمر */
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.icon-fav-emerg .emerg-icon i {
+  font-size: 11px;
+  color: #fff;
+}
+
+.card-contant .icon-small {
+  width: 30px;
+  height: 30px;
+  i {
+    font-size: 12px;
+  }
+}
+.all-button-for-card {
+  i {
+    font-size: 13px;
+  }
+}
+.telphone-icon {
+  background-color: #d0fae5;
+  transition: all 0.2s;
+  i {
+    color: #009966;
+  }
+  &:hover {
+    background-color: #749e89e3;
+  }
+}
+.mail-icon {
+  background-color: #ede9fe;
+  transition: all 0.2s;
+  i {
+    color: #826bf8;
+    &:hover {
+      color: yellow;
+    }
+  }
+  &:hover {
+    background-color: #c9c2eb88;
+  }
+}
+.fav-icon {
+  transition: all 0.2s;
+  &:hover i {
+    color: yellow;
+  }
+}
+.emerg-icon {
+  transition: all 0.2s;
+  &:hover i {
+    color: red;
+  }
+}
+.delete {
+  &:hover {
+    background-color: #fff1f2;
+  }
+
+  &:hover i {
+    color: red;
+  }
 }
