@@ -1,6 +1,6 @@
 :root {
   --main-color: #6432f9;
-
+  --color-user:#216FFE ;
   --hover-color: #62627870;
   --tw-shadow-color: color-mix(
     in oklab,
@@ -60,4 +60,32 @@ nav .right-nav .add-contant:hover {
 nav .right-nav .for-user-image {
   width: 40px;
   height: 40px;
+}
+
+
+
+.img-box span {
+    width: 100px;
+    height: 100px;
+    background-color: var(--color-user);
+    
+}
+.change-photo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: #f5f5f7;
+  color: #4a5568;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid #e2e8f0;
+}
+
+
+textarea {
+resize: none !important;
+height: 70px;
 }
