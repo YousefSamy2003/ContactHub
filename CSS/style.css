@@ -1,0 +1,63 @@
+:root {
+  --main-color: #6432f9;
+
+  --hover-color: #62627870;
+  --tw-shadow-color: color-mix(
+    in oklab,
+    oklch(60.6% 0.25 292.717) 30%,
+    transparent
+  );
+  --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color),
+    0 4px 6px -4px var(--tw-shadow-color);
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.button-icon {
+  width: 30px;
+  height: 30px;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: unset;
+  outline: unset;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.button-icon i {
+  color: #6a7282;
+}
+
+.button-icon:hover {
+  background-color: var(--hover-color);
+}
+
+nav .icon {
+  width: 45px;
+  height: 45px;
+  aspect-ratio: 1/1;
+  background-color: var(--main-color);
+}
+
+nav p {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6a7282;
+}
+
+nav .right-nav .add-contant {
+  transition: all 0.2s;
+}
+
+nav .right-nav .add-contant:hover {
+  box-shadow: var(--tw-shadow);
+  transform: translateY(-5px);
+}
+nav .right-nav .for-user-image {
+  width: 40px;
+  height: 40px;
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/style.css" />
+    <link rel="stylesheet" href="../CSS/bootstrap.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="log d-flex align-items-center">
+            <span
+              class="icon d-flex align-items-center justify-content-center rounded-3"
+            >
+              <i class="fa-solid fa-address-book text-white fs-5"></i>
+            </span>
+            <div class="d-flex flex-column px-3">
+              <span style="font-size: 24px; font-weight: 700"
+                >Contact <span style="color: var(--main-color)">Hub</span>
+              </span>
+              <p>Smart Contact Manager</p>
+            </div>
+          </div>
+          <div class="right-nav">
+            <!-- Button trigger modal -->
+            <div class="d-flex align-items-center gap-3">
+              <button
+                type="button"
+                class="btn py-2 rounded-4 add-contant"
+                style="
+                  background-color: var(--main-color);
+                  color: #fff;
+                  font-weight: 500;
+                "
+                data-bs-toggle="modal"
+                data-bs-target="#addcontact"
+              >
+                <i class="fa-solid fa-plus me-2" style="font-size: 13px"></i
+                ><span class="">Add Contact</span>
+              </button>
+              <button class="button-icon d-none d-md-block">
+                <i class="fa-solid fa-bell"></i>
+              </button>
+              <button class="button-icon d-none d-md-block">
+                <i class="fa-solid fa-gear"></i>
+              </button>
+              <span class="overflow-hidden rounded-4 for-user-image">
+                <img
+                  src="../images/avatar-4.jpg"
+                  alt="user"
+                  class="img-fluid"
+                />
+              </span>
+            </div>
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="addcontact"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                      Modal title
+                    </h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">...</div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                      Save changes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <script src="../JS/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
