@@ -34,6 +34,8 @@ let regularExpression = {
 
 document.forms[0].addEventListener("submit", function (e) {
   e.preventDefault();
+});
+document.getElementById("mainButton").addEventListener("click", function (e) {
   getData();
   getFavoritesList();
   getEmergencyList();
@@ -678,6 +680,5 @@ function vaildationName(input) {
     return false;
   }
 }
-
 
 getAndCheckLocalStorage();
