@@ -9,6 +9,8 @@ let address = document.getElementById("address");
 let imageContact = document.getElementById("imageContact");
 
 let rowContact = document.getElementById("rowContact");
+let favRow = document.getElementById("favRow");
+let emergRow = document.getElementById("emergRow");
 
 let allContactList = [];
 let favoritesList = [];
@@ -22,6 +24,7 @@ document.forms[0].addEventListener("submit", function (e) {
   getData();
   getFavoritesList();
   getEmergencyList();
+  displayFavorites();
 });
 
 ///getImageAndImagePrev
@@ -55,7 +58,12 @@ function getData() {
   };
   allContactList.push(Contact);
   storeInLocalStorage();
+
+  getFavoritesList();
+  getEmergencyList();
+
   display();
+  displayFavorites();
 }
 
 function storeInLocalStorage() {
@@ -69,7 +77,11 @@ function getAndCheckLocalStorage() {
     allContactList = [];
   }
 
+  getFavoritesList();
+  getEmergencyList();
+
   display();
+  displayFavorites();
 }
 
 function getFavoritesList() {
@@ -241,154 +253,60 @@ function display() {
   rowContact.innerHTML = box;
 }
 
+function displayFavorites() {
+  let boxFav = "";
+
+  if (favoritesList.length === 0) {
+    boxFav = `
+      <div class="p-5">
+        <p class="text-center text-secondary" style="font-size:18px; font-weight:500">
+          No favorites yet
+        </p>
+      </div>
+    `;
+  } else {
+ 
+    for (let i = 0; i < favoritesList.length; i++) {
+      boxFav += `
+        <div>
+          <div class="contant">
+            <div class="card-contant rounded-3 p-2">
+              <div class="name-and-number for-hover-fav d-flex align-items-center justify-content-between p-2"> 
+                <div class="d-flex">
+                  <span class="rounded-4 icon-inside d-flex justify-content-center align-items-center" style="background-color: var(--main-color);">
+                    ${
+                      favoritesList[i].imageContact
+                        ? `<img src="${favoritesList[i].imageContact}" class="img-fluid rounded-3" alt="">`
+                        : `<span class="text-white fw-bold">
+                             ${favoritesList[i].fullName
+                               .split(" ")
+                               .join("")
+                               .slice(0, 2)
+                               .toUpperCase()}
+                           </span>`
+                    }
+                  </span>
+                  <span class="d-flex flex-column px-3">
+                    <span class="fw-bold" style="font-size:12px">${favoritesList[i].fullName}</span>
+                    <span class="text-secondary" style="font-size:12px">${favoritesList[i].phoneNumber}</span>
+                  </span>
+                </div>
+
+                <span class="button-icon telphone-icon">
+                  <a href="tel:${favoritesList[i].phoneNumber}">
+                    <i class="fa-solid fa-phone"></i>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  favRow.innerHTML = boxFav;
+}
 
 ///----------------------  init --------------------------
 getAndCheckLocalStorage();
-
-// let box = `
-
-//    <div class="col-md-6">
-//                       <div class="p-3">
-//                         <div class="card-contant rounded-3 p-2">
-//                           <div
-//                             class="name-and-number d-flex align-items-center p-2"
-//                           >
-//                             <span
-//                               class="icon-fav-emerg d-flex align-items-center justify-content-center rounded-3"
-//                             >
-//                               <!--  if condition  -->
-//                               <span class="fav-icon   ${
-//                                 allContactList[i].favorite
-//                                   ? "d-block"
-//                                   : "d-none"
-//                               }
-//                                 ><i class="fa-solid fa-star"></i
-//                               ></span>
-
-//                               <span class="emerg-icon   ${
-//                                 allContactList[i].emergency
-//                                   ? "d-block"
-//                                   : "d-none"
-//                               }"
-//                                 ><i class="fa-solid fa-heart-pulse"></i
-//                               ></span>
-//                               <!-- javascript if condition -->
-//                             ${
-//                               allContactList[i].imageContact
-//                                 ? `<img src="${allContactList[i].imageContact}" class="d-none img-fluid rounded-3" alt="">`
-//                                 : `<span class="text-white fw-bold">${allContactList[
-//                                     i
-//                                   ].fullName.slice(0, 2)}</span>`
-//                             }
-
-//                             </span>
-
-//                             <div class="d-flex flex-column px-3">
-//                               <span class="fw-bold">${
-//                                 allContactList[i].fullName
-//                               } </span>
-//                               <span class="d-flex align-items-center"
-//                                 ><span
-//                                   class="icon-small d-flex align-items-center justify-content-center rounded-3"
-//                                   style="background-color: #dbeafe"
-//                                   ><i
-//                                     class="fa-solid fa-phone"
-//                                     style="color: blue"
-//                                   ></i
-//                                 ></span>
-
-//                                 <span class="fw-bold px-2 text-secondary"
-//                                   >${allContactList[i].phoneNumber}</span
-//                                 >
-//                               </span>
-//                             </div>
-//                           </div>
-//                           <div class="email d-flex align-items-center p-2">
-//                             <span
-//                               class="icon-small d-flex align-items-center justify-content-center rounded-3"
-//                               style="background-color: #ede9fe"
-//                             >
-//                               <i class="fa-solid fa-envelope"></i>
-//                             </span>
-//                             <span class="text-secondary px-2"
-//                               >${allContactList[i].emailAddress}
-//                             </span>
-//                           </div>
-//                           <div class="address d-flex align-items-center p-2">
-//                             <span
-//                               class="icon-small d-flex align-items-center justify-content-center rounded-3"
-//                               style="background-color: #d0fae5"
-//                             >
-//                               <i class="fa-solid fa-location-dot"></i>
-//                             </span>
-//                             <span
-//                               class="text-secondary px-2"
-//                               style="font-size: 12px"
-//                               >${allContactList[i].address}
-//                             </span>
-//                           </div>
-//                           <!-- need if condition here -->
-//                           <div class="p-2 badge bg-light  ${
-//                             allContactList[i].emergency ? "d-block" : "d-none"
-//                           }">
-//                             <span class="text-danger">
-//                               <i
-//                                 class="fa-solid fa-heart-pulse text-danger"
-//                               ></i>
-//                               <span>Emergency </span>
-//                             </span>
-//                           </div>
-//                           <hr />
-
-//                           <div
-//                             class="all-button-for-card d-flex justify-content-between align-items-center p-2"
-//                           >
-//                             <div class="d-flex gap-2">
-//                               <span class="button-icon telphone-icon">
-//                                 <a href="tel:${allContactList[i].phoneNumber}}"
-//                                   ><i class="fa-solid fa-phone"></i
-//                                 ></a>
-//                               </span>
-//                               <span class="button-icon mail-icon">
-//                                 <a href="mailto:${
-//                                   allContactList[i].emailAddress
-//                                 }"
-//                                   ><i class="fa-solid fa-envelope"></i
-//                                 ></a>
-//                               </span>
-//                             </div>
-//                             <div class="d-flex gap-2">
-//                               <span class="button-icon fav-icon">
-//                                 <!-- need if condition here -->
-
-//                               ${
-//                                 allContactList[i].favorite
-//                                   ? `<i class="fa-solid fa-star" style="color:#ffd43b"></i>`
-//                                   : `<i class="fa-solid fa-star"></i>`
-//                               }
-//                               </span>
-//                              ${
-//                                allContactList[i].emergency
-//                                  ? `<i class="fa-solid fa-heart-pulse text-danger"></i>`
-//                                  : `<i class="fa-solid fa-heart-pulse"></i>`
-//                              }
-//                               <span>
-//                                 <button
-//                                   class="button-icon edit"
-//                                   data-bs-toggle="modal"
-//                                   data-bs-target="#addcontact"
-//                                 >
-//                                   <i class="fa-solid fa-pen"></i>
-//                                 </button>
-//                               </span>
-//                               <span>
-//                                 <button class="button-icon delete">
-//                                   <i class="fa-solid fa-trash"></i></button
-//                               ></span>
-//                             </div>
-//                           </div>
-//                         </div>
-//                       </div>
-//                     </div>
-
-// `;
