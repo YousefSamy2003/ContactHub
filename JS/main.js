@@ -11,7 +11,11 @@ let imageContact = document.getElementById("imageContact");
 let rowContact = document.getElementById("rowContact");
 let favRow = document.getElementById("favRow");
 let emergRow = document.getElementById("emergRow");
-
+let totalNumber = {
+  totalList: document.getElementById("totalList"),
+  totalFav: document.getElementById("totalFav"),
+  totalEmerg: document.getElementById("totalEmerg"),
+};
 let allContactList = [];
 let favoritesList = [];
 let emergencyList = [];
@@ -25,6 +29,7 @@ document.forms[0].addEventListener("submit", function (e) {
   getFavoritesList();
   getEmergencyList();
   displayFavorites();
+  displayEmergency();
 });
 
 ///getImageAndImagePrev
@@ -46,6 +51,7 @@ imageContact.addEventListener("change", function () {
 
 function getData() {
   let Contact = {
+    id: Date.now(),
     fullName: fullName.value,
     phoneNumber: phoneNumber.value,
     emailAddress: emailAddress.value,
@@ -64,6 +70,8 @@ function getData() {
 
   display();
   displayFavorites();
+  displayEmergency();
+  getTotalNumberForAllList();
 }
 
 function storeInLocalStorage() {
@@ -77,11 +85,12 @@ function getAndCheckLocalStorage() {
     allContactList = [];
   }
 
-  getFavoritesList();
   getEmergencyList();
-
-  display();
+  displayEmergency();
+  getFavoritesList();
   displayFavorites();
+  getTotalNumberForAllList();
+  display();
 }
 
 function getFavoritesList() {
@@ -102,7 +111,11 @@ function getEmergencyList() {
   }
   console.log(emergencyList);
 }
-
+function getTotalNumberForAllList() {
+  totalNumber.totalList.innerHTML = allContactList.length;
+  totalNumber.totalFav.innerHTML = favoritesList.length;
+  totalNumber.totalEmerg.innerHTML = emergencyList.length;
+}
 function display() {
   let box = "";
   for (let i = 0; i < allContactList.length; i++) {
@@ -219,16 +232,20 @@ function display() {
         </div>
 
         <div class="d-flex gap-2">
-          <span class="button-icon fav-icon">
+          <span class="button-icon fav-icon" onclick="handleFav(${
+            allContactList[i].id
+          })">
             <i class="fa-solid fa-star ${
               allContactList[i].favorite ? "text-warning" : ""
-            }"></i>
+            }"  ></i>
           </span>
 
-          <span class="button-icon emerg-icon">
+          <span class="button-icon emerg-icon" onclick="handleEmerg(${
+            allContactList[i].id
+          })">
             <i class="fa-solid fa-heart-pulse ${
               allContactList[i].emergency ? "text-danger" : ""
-            }"></i>
+            }"    ></i>
           </span>
 
           <button
@@ -265,7 +282,6 @@ function displayFavorites() {
       </div>
     `;
   } else {
- 
     for (let i = 0; i < favoritesList.length; i++) {
       boxFav += `
         <div>
@@ -287,8 +303,12 @@ function displayFavorites() {
                     }
                   </span>
                   <span class="d-flex flex-column px-3">
-                    <span class="fw-bold" style="font-size:12px">${favoritesList[i].fullName}</span>
-                    <span class="text-secondary" style="font-size:12px">${favoritesList[i].phoneNumber}</span>
+                    <span class="fw-bold" style="font-size:12px">${
+                      favoritesList[i].fullName
+                    }</span>
+                    <span class="text-secondary" style="font-size:12px">${
+                      favoritesList[i].phoneNumber
+                    }</span>
                   </span>
                 </div>
 
@@ -307,6 +327,88 @@ function displayFavorites() {
 
   favRow.innerHTML = boxFav;
 }
+function displayEmergency() {
+  let boxEmerg = "";
 
+  if (emergencyList.length === 0) {
+    boxEmerg = `
+      <div class="p-5">
+        <p class="text-center text-secondary" style="font-size:18px; font-weight:500">
+          No Emergency yet
+        </p>
+      </div>
+    `;
+  } else {
+    for (let i = 0; i < emergencyList.length; i++) {
+      boxEmerg += `
+        <div>
+          <div class="contant">
+            <div class="card-contant rounded-3 p-2">
+              <div class="name-and-number for-hover-emerg d-flex align-items-center justify-content-between p-2"> 
+                <div class="d-flex">
+                  <span class="rounded-4 icon-inside d-flex justify-content-center align-items-center" style="background-color: var(--main-color);">
+                    ${
+                      emergencyList[i].imageContact
+                        ? `<img src="${emergencyList[i].imageContact}" class="img-fluid rounded-3" alt="">`
+                        : `<span class="text-white fw-bold">
+                             ${emergencyList[i].fullName
+                               .split(" ")
+                               .join("")
+                               .slice(0, 2)
+                               .toUpperCase()}
+                           </span>`
+                    }
+                  </span>
+                  <span class="d-flex flex-column px-3">
+                    <span class="fw-bold" style="font-size:12px">${
+                      emergencyList[i].fullName
+                    }</span>
+                    <span class="text-secondary" style="font-size:12px">${
+                      emergencyList[i].phoneNumber
+                    }</span>
+                  </span>
+                </div>
+                <span class="button-icon telphone-icon">
+                  <a href="tel:${emergencyList[i].phoneNumber}">
+                    <i class="fa-solid fa-phone"></i>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  emergRow.innerHTML = boxEmerg;
+}
+
+function handleFav(id) {
+  let index = allContactList.findIndex(
+    (allContactList) => allContactList.id === id
+  );
+  allContactList[index].favorite = !allContactList[index].favorite;
+  storeInLocalStorage();
+  getEmergencyList();
+  displayEmergency();
+  getFavoritesList();
+  displayFavorites();
+  getTotalNumberForAllList();
+  display();
+}
+function handleEmerg(id) {
+  let index = allContactList.findIndex(
+    (allContactList) => allContactList.id === id
+  );
+  allContactList[index].emergency = !allContactList[index].emergency;
+  storeInLocalStorage();
+  getEmergencyList();
+  displayEmergency();
+  getFavoritesList();
+  displayFavorites();
+  getTotalNumberForAllList();
+  display();
+}
 ///----------------------  init --------------------------
 getAndCheckLocalStorage();
