@@ -21,6 +21,8 @@ let favoritesList = [];
 let emergencyList = [];
 let currentImage = "";
 
+let GlobalIndexForUpdate;
+
 ///  events
 
 document.forms[0].addEventListener("submit", function (e) {
@@ -252,6 +254,7 @@ function display() {
             class="button-icon edit"
             data-bs-toggle="modal"
             data-bs-target="#addcontact"
+            onclick="updateUploadToForm(${allContactList[i].id})"
           >
             <i class="fa-solid fa-pen"></i>
           </button>
@@ -398,7 +401,7 @@ function handleFav(id) {
   display();
 }
 function handleEmerg(id) {
-  let index = allContactList.findIndex(
+  GlobalIndexForUpdate = allContactList.findIndex(
     (allContactList) => allContactList.id === id
   );
   allContactList[index].emergency = !allContactList[index].emergency;
@@ -410,5 +413,64 @@ function handleEmerg(id) {
   getTotalNumberForAllList();
   display();
 }
+
+function updateUploadToForm(id) {
+  let index = allContactList.findIndex(
+    (allContactList) => allContactList.id === id
+  );
+  GlobalIndexForUpdate = index;
+
+  fullName.value = allContactList[index].fullName;
+  phoneNumber.value = allContactList[index].phoneNumber;
+  emailAddress.value = allContactList[index].emailAddress;
+  group.value = allContactList[index].group;
+  notes.value = allContactList[index].notes;
+  emergency.checked = allContactList[index].emergency;
+  favorite.checked = allContactList[index].favorite;
+  address.value = allContactList[index].address;
+  currentImage = allContactList[index].imageContact;
+
+  if (currentImage) {
+    document.getElementById("imageSpan").classList.replace("d-block", "d-none");
+    document
+      .getElementById("imagePreview")
+      .classList.replace("d-none", "d-block");
+    document.getElementById("imagePreview").src = currentImage;
+  }
+  console.log(index);
+  document.getElementById("mainButton").classList.replace("d-block", "d-none");
+  document
+    .getElementById("updateButton")
+    .classList.replace("d-none", "d-block");
+}
+
+function updateContact() {
+  let Contact = {
+    fullName: fullName.value,
+    phoneNumber: phoneNumber.value,
+    emailAddress: emailAddress.value,
+    group: group.value,
+    address: address.value,
+    notes: notes.value,
+    emergency: emergency.checked,
+    favorite: favorite.checked,
+    imageContact: currentImage,
+  };
+  allContactList.splice(GlobalIndexForUpdate, 1, Contact);
+  storeInLocalStorage();
+
+  document.getElementById("mainButton").classList.replace("d-none", "d-block");
+  document
+    .getElementById("updateButton")
+    .classList.replace("d-block", "d-none");
+
+  getEmergencyList();
+  displayEmergency();
+  getFavoritesList();
+  displayFavorites();
+  getTotalNumberForAllList();
+  display();
+}
+
 ///----------------------  init --------------------------
 getAndCheckLocalStorage();

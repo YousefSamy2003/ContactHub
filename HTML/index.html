@@ -236,11 +236,24 @@
                              data-bs-dismiss="modal"
                             type="submit"
                             id="mainButton"
-                            class="btn form-control"
+                            class="btn form-control d-block"
                             style="
                               background-color: var(--main-color);
                               color: #fff;
                             "
+                          >
+                            Save Contact
+                          </button>
+                          <button
+                             data-bs-dismiss="modal"
+                          
+                            id="updateButton"
+                            class="btn form-control  btn-danger d-none"
+                            style="
+                              background-color: var(--main-color);
+                              color: #fff;
+                            "
+                            onclick="updateContact()"
                           >
                             Save Contact
                           </button>
