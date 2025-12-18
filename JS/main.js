@@ -169,6 +169,7 @@ function storeInLocalStorage() {
 
 function clearForm() {
   document.forms[0].reset();
+  currentImage = "";
 }
 
 function getAndCheckLocalStorage() {
@@ -678,24 +679,5 @@ function vaildationName(input) {
   }
 }
 
-// function vaildationEmail() {
-//   if (emailRegex.test(emailAddress.value)) {
-//     emailAddress.nextElementSibling.classList.replace("d-block", "d-none");
-//     return true;
-//   } else {
-//     emailAddress.nextElementSibling.classList.replace("d-none", "d-block");
-//     return false;
-//   }
-// }
-
-// function vaildationPhoneNumber() {
-//   if (phoneRegex.test(phoneNumber.value)) {
-//     phoneNumber.nextElementSibling.classList.replace("d-block", "d-none");
-//     return true;
-//   } else {
-//     phoneNumber.nextElementSibling.classList.replace("d-none", "d-block");
-//     return false;
-//   }
-// }
 
 getAndCheckLocalStorage();
