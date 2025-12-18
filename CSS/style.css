@@ -258,3 +258,15 @@ section {
     width: 40px;
     height: 40px;
 }
+.for-hover-emerg{
+    
+&:hover {
+    background-color: #FFF1F2;
+}
+}
+.for-hover-fav{
+    
+&:hover {
+    background-color: #FFF8ED;
+}
+}

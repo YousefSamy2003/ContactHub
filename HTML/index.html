@@ -93,19 +93,20 @@
                   <div class="modal-body">
                     <!-- for image -->
                     <div
-                      class="img-box d-flex flex-column align-items-center justify-content-center"
+                      class="img-box  d-flex flex-column align-items-center justify-content-center"
                     >
-                      <div class="overflow-hidden rounded-circle">
+                      <div class="overflow-hidden  rounded-circle" >
                         <span
-                          class="d-flex justify-content-center align-items-center"
+                          class="d-flex justify-content-center align-items-center" 
                         >
-                          <i class="fa-solid fa-user text-white fs-4"></i>
+                          <i class="fa-solid fa-user text-white fs-4  d-block" id="imageSpan"></i>
 
                           <!-- need java script code here   -->
                           <img
                             src="../images/avatar-4.jpg"
                             class="d-none img-fluid"
                             alt=""
+                            id="imagePreview"
                           />
                         </span>
                       </div>
@@ -156,8 +157,7 @@
                       >
                       <input
                         type="email"
-                        id="emailAddress
-"
+                        id="emailAddress"
                         class="form-control"
                         required
                       />
@@ -194,7 +194,7 @@
                           <input
                             class="form-check-input"
                             type="checkbox"
-                            value="favorite"
+                    
                             id="favorite"
                           />
                           <label class="form-check-label px-2" for="favorite">
@@ -209,7 +209,7 @@
                           <input
                             class="form-check-input"
                             type="checkbox"
-                            value="emergency"
+                  
                             id="emergency"
                           />
                           <label class="form-check-label px-2" for="emergency">
@@ -338,130 +338,8 @@
                     />
                   </div>
                   <!-- code javascript here  -->
-                  <div class="row mt-4">
-                    <div class="col-md-6">
-                      <div class="p-3">
-                        <div class="card-contant rounded-3 p-2">
-                          <div
-                            class="name-and-number d-flex align-items-center p-2"
-                          >
-                            <span
-                              class="icon-fav-emerg d-flex align-items-center justify-content-center rounded-3"
-                            >
-                              <!--  if condition  -->
-                              <span class="fav-icon"
-                                ><i class="fa-solid fa-star"></i
-                              ></span>
-
-                              <span class="emerg-icon"
-                                ><i class="fa-solid fa-heart-pulse"></i
-                              ></span>
-                              <!-- javascript if condition -->
-                              <span class="text-white fw-bold">YS </span>
-                              <!-- <img src="../images/avatar-4.jpg"  class="d-none   img-fluid rounded-3" alt=""> -->
-                            </span>
-
-                            <div class="d-flex flex-column px-3">
-                              <span class="fw-bold">Yousef Ahmed Samy </span>
-                              <span class="d-flex align-items-center"
-                                ><span
-                                  class="icon-small d-flex align-items-center justify-content-center rounded-3"
-                                  style="background-color: #dbeafe"
-                                  ><i
-                                    class="fa-solid fa-phone"
-                                    style="color: blue"
-                                  ></i
-                                ></span>
-
-                                <span class="fw-bold px-2 text-secondary"
-                                  >01003849368</span
-                                >
-                              </span>
-                            </div>
-                          </div>
-                          <div class="email d-flex align-items-center p-2">
-                            <span
-                              class="icon-small d-flex align-items-center justify-content-center rounded-3"
-                              style="background-color: #ede9fe"
-                            >
-                              <i class="fa-solid fa-envelope"></i>
-                            </span>
-                            <span class="text-secondary px-2"
-                              >yousafsamy9@gmail.com
-                            </span>
-                          </div>
-                          <div class="address d-flex align-items-center p-2">
-                            <span
-                              class="icon-small d-flex align-items-center justify-content-center rounded-3"
-                              style="background-color: #d0fae5"
-                            >
-                              <i class="fa-solid fa-location-dot"></i>
-                            </span>
-                            <span
-                              class="text-secondary px-2"
-                              style="font-size: 12px"
-                              >دمياط/السنانيه
-                            </span>
-                          </div>
-                          <!-- need if condition here -->
-                          <div class="p-2 badge bg-light">
-                            <span class="text-danger">
-                              <i
-                                class="fa-solid fa-heart-pulse text-danger"
-                              ></i>
-                              <span>Emergency </span>
-                            </span>
-                          </div>
-                          <hr />
-
-                          <div
-                            class="all-button-for-card d-flex justify-content-between align-items-center p-2"
-                          >
-                            <div class="d-flex gap-2">
-                              <span class="button-icon telphone-icon">
-                                <a href="tel:01003849368"
-                                  ><i class="fa-solid fa-phone"></i
-                                ></a>
-                              </span>
-                              <span class="button-icon mail-icon">
-                                <a href="mailto:yousafsamy9@gmail.com"
-                                  ><i class="fa-solid fa-envelope"></i
-                                ></a>
-                              </span>
-                            </div>
-                            <div class="d-flex gap-2">
-                              <span class="button-icon fav-icon">
-                                <!-- need if condition here -->
-                                <i class="fa-solid fa-star"></i>
-                                <i
-                                  class="fa-solid fa-star d-none"
-                                  style="color: #ffd43b"
-                                ></i>
-                              </span>
-                              <span class="button-icon emerg-icon">
-                                <i class="fa-solid fa-heart-pulse"></i>
-                                <i
-                                  class="fa-solid fa-heart-pulse text-danger d-none"
-                                ></i>
-                              </span>
-                              <span>
-                                <button
-                                  class="button-icon edit"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#addcontact"
-                                >
-                                  <i class="fa-solid fa-pen"></i>
-                                </button>
-                              </span>
-                              <span>
-                                <button class="button-icon delete">
-                                  <i class="fa-solid fa-trash"></i></button
-                              ></span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  <div class="row mt-4"  id="rowContact">
+                   
                   </div>
                 </div>
               </div>
@@ -497,7 +375,7 @@
                         <div class="contant">
                           <div class="card-contant rounded-3 p-2">
                             <div
-                              class="name-and-number d-flex align-items-center justify-content-between p-2"
+                              class="name-and-number for-hover-fav d-flex align-items-center justify-content-between p-2"
                             > 
                             <div class="d-flex">
                                 <span class="rounded-4  icon-inside d-flex justify-content-center align-items-center" style="background-color: var(--main-color);">
@@ -559,11 +437,11 @@
                         <p class="text-center text-secondary" style="font-size: 18px; font-weight: 500" >No favorites yet</p>
                       </div>
 
-                      <div>
+                      <div  >
                         <div class="contant">
                           <div class="card-contant rounded-3 p-2">
                             <div
-                              class="name-and-number d-flex align-items-center justify-content-between p-2"
+                              class="for-hover-emerg name-and-number d-flex align-items-center justify-content-between p-2"
                             > 
                             <div class="d-flex">
                                 <span class="rounded-4  icon-inside d-flex justify-content-center align-items-center" style="background-color: var(--main-color);">
@@ -592,5 +470,6 @@
     </main>
 
     <script src="../JS/bootstrap.bundle.min.js"></script>
+    <script src="../JS/main.js"></script>
   </body>
 </html>
