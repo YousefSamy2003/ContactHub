@@ -135,7 +135,7 @@
                         class="form-control"
                         required
                       />
-                      <div id="nameHelpBlock" class="form-text text-danger">
+                      <div id="nameHelpBlock" class="d-none form-text text-danger">
                         Name should contain only letters and spaces (2-50
                         characters)
                       </div>
@@ -149,7 +149,7 @@
                         placeholder="01003849368"
                         required
                       />
-                      <div id="phoneHelpBlock" class="form-text text-danger">
+                      <div id="phoneHelpBlock" class="d-none form-text text-danger">
                         Please enter a valid Egyptian phone number
                       </div>
                       <label for="emailAddress" class="form-label"
@@ -161,13 +161,13 @@
                         class="form-control"
                         required
                       />
-                      <div id="emailHelpBlock" class="form-text text-danger">
+                      <div id="emailHelpBlock" class="d-none form-text text-danger">
                         Please enter a valid email address
                       </div>
                       <label for="address" class="form-label">Address </label>
                       <input type="text" id="address" class="form-control" />
 
-                      <label for="group" class="form-label">Address </label>
+                      <label for="group" class="form-label">Group </label>
                       <select
                         id="group"
                         class="form-select mb-3"
@@ -233,7 +233,7 @@
                         </div>
                         <div class="col-6">
                           <button
-                             data-bs-dismiss="modal"
+                               
                             type="submit"
                             id="mainButton"
                             class="btn form-control d-block"
@@ -255,7 +255,7 @@
                             "
                             onclick="updateContact()"
                           >
-                            Save Contact
+                            Update Contact
                           </button>
                         </div>
                       </div>
@@ -275,7 +275,7 @@
           <!-- t    o   p -->
           <div class="about-all-list">
             <div class="row">
-              <div class="col-md-4 p-3 rounded-3">
+              <div class="col-lg-4 p-3 rounded-3">
                 <div class="box-design rounded-4">
                   <div class="d-flex align-items-center p-3">
                     <span
@@ -293,7 +293,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4 p-3 rounded-3">
+              <div class="col-lg-4 p-3 rounded-3">
                 <div class="box-design rounded-4">
                   <div class="d-flex align-items-center p-3">
                     <span
@@ -311,7 +311,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4 p-3 rounded-3">
+              <div class="col-lg-4 p-3 rounded-3">
                 <div class="box-design rounded-4">
                   <div class="d-flex align-items-center p-3">
                     <span
@@ -334,7 +334,7 @@
 
           <div class="container">
             <div class="row">
-              <div class="col-md-9">
+              <div class="col-lg-9">
                 <div class="main-section pe-4">
                   <div class="search">
                     <h1 class="h3 fs-4 fw-bold">All Contacts</h1>
@@ -357,7 +357,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-lg-3">
                 <div class="right-section" >
                   <div class="fav-list rounded-3 p-3">
                     <div class="top-fav d-flex align-items-center p-2">

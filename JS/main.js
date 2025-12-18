@@ -77,32 +77,83 @@ searchInput.addEventListener("input", function () {
 //              functions
 
 function getData() {
-  let Contact = {
-    id: Date.now(),
-    fullName: fullName.value,
-    phoneNumber: phoneNumber.value,
-    emailAddress: emailAddress.value,
-    group: group.value,
-    address: address.value,
-    notes: notes.value,
-    emergency: emergency.checked,
-    favorite: favorite.checked,
-    imageContact: currentImage,
-  };
-  allContactList.push(Contact);
-  storeInLocalStorage();
+  let isNameValid = vaildationName();
+  let isEmailValid = vaildationEmail();
+  let isPhoneValid = vaildationPhoneNumber();
 
-  getFavoritesList();
-  getEmergencyList();
+  if (isNameValid && isEmailValid && isPhoneValid) {
+    let isDuplicate = allContactList.some(
+      (contact) => contact.phoneNumber === phoneNumber.value
+    );
 
-  display();
-  displayFavorites();
-  displayEmergency();
-  getTotalNumberForAllList();
+    if (isDuplicate) {
+      Swal.fire({
+        icon: "error",
+        title: "الرقم موجود مسبقاً",
+        text: "هذا الرقم مسجل بالفعل لجهة اتصال أخرى.",
+        confirmButtonText: "حسناً",
+        confirmButtonColor: "#7066e0",
+      });
+      return;
+    }
+
+    let Contact = {
+      id: Date.now(),
+      fullName: fullName.value,
+      phoneNumber: phoneNumber.value,
+      emailAddress: emailAddress.value,
+      group: group.value,
+      address: address.value,
+      notes: notes.value,
+      emergency: emergency.checked,
+      favorite: favorite.checked,
+      imageContact: currentImage,
+    };
+
+    allContactList.push(Contact);
+    storeInLocalStorage();
+    clearForm();
+    getFavoritesList();
+    getEmergencyList();
+    display();
+    displayFavorites();
+    displayEmergency();
+    getTotalNumberForAllList();
+
+    let modalElement = document.getElementById("addcontact");
+    let modalInstance = bootstrap.Modal.getInstance(modalElement);
+    if (modalInstance) {
+      modalInstance.hide();
+    }
+
+    Swal.fire({
+      icon: "success",
+      title: "تم الحفظ!",
+      text: "تم إضافة جهة الاتصال بنجاح",
+      timer: 1500,
+      showConfirmButton: false,
+    });
+  } else {
+    let errorMsg = "";
+    if (!isNameValid) errorMsg = "يرجى كتابة الاسم بشكل صحيح (3 حروف فأكثر).";
+    else if (!isEmailValid) errorMsg = "يرجى التأكد من صيغة البريد الإلكتروني.";
+    else if (!isPhoneValid) errorMsg = "يرجى إدخال رقم هاتف مصري صحيح.";
+
+    Swal.fire({
+      icon: "error",
+      title: "بيانات غير صالحة",
+      text: errorMsg,
+      confirmButtonText: "حسناً",
+      confirmButtonColor: "#7066e0",
+    });
+  }
 }
-
 function storeInLocalStorage() {
   localStorage.setItem("contacts", JSON.stringify(allContactList));
+}
+
+function clearForm() {
+  document.forms[0].reset();
 }
 
 function getAndCheckLocalStorage() {
@@ -413,7 +464,10 @@ function displayEmergency() {
 }
 
 function handleFav(id) {
-  let index = list.findIndex((allContactList) => allContactList.id === id);
+  let index = allContactList.findIndex(
+    (allContactList) => allContactList.id === id
+  );
+
   allContactList[index].favorite = !allContactList[index].favorite;
   storeInLocalStorage();
   getEmergencyList();
@@ -468,31 +522,88 @@ function updateUploadToForm(id) {
 }
 
 function updateContact() {
-  let Contact = {
-    fullName: fullName.value,
-    phoneNumber: phoneNumber.value,
-    emailAddress: emailAddress.value,
-    group: group.value,
-    address: address.value,
-    notes: notes.value,
-    emergency: emergency.checked,
-    favorite: favorite.checked,
-    imageContact: currentImage,
-  };
-  allContactList.splice(GlobalIndexForUpdate, 1, Contact);
-  storeInLocalStorage();
+  let isNameValid = vaildationName();
+  let isEmailValid = vaildationEmail();
+  let isPhoneValid = vaildationPhoneNumber();
 
-  document.getElementById("mainButton").classList.replace("d-none", "d-block");
-  document
-    .getElementById("updateButton")
-    .classList.replace("d-block", "d-none");
+  if (isNameValid && isEmailValid && isPhoneValid) {
+    let isDuplicate = allContactList.some((contact, index) => {
+      return (
+        contact.phoneNumber === phoneNumber.value &&
+        index !== GlobalIndexForUpdate
+      );
+    });
 
-  getEmergencyList();
-  displayEmergency();
-  getFavoritesList();
-  displayFavorites();
-  getTotalNumberForAllList();
-  display();
+    if (isDuplicate) {
+      Swal.fire({
+        icon: "error",
+        title: "الرقم موجود مسبقاً",
+        text: "هذا الرقم مسجل بالفعل لجهة اتصال أخرى.",
+        confirmButtonText: "حسناً",
+        confirmButtonColor: "#7066e0",
+      });
+      return;
+    }
+
+    let Contact = {
+      id: allContactList[GlobalIndexForUpdate].id,
+      fullName: fullName.value,
+      phoneNumber: phoneNumber.value,
+      emailAddress: emailAddress.value,
+      group: group.value,
+      address: address.value,
+      notes: notes.value,
+      emergency: emergency.checked,
+      favorite: favorite.checked,
+      imageContact: currentImage,
+    };
+
+    allContactList.splice(GlobalIndexForUpdate, 1, Contact);
+
+    storeInLocalStorage();
+    clearForm();
+
+    document
+      .getElementById("mainButton")
+      .classList.replace("d-none", "d-block");
+    document
+      .getElementById("updateButton")
+      .classList.replace("d-block", "d-none");
+
+    getEmergencyList();
+    displayEmergency();
+    getFavoritesList();
+    displayFavorites();
+    getTotalNumberForAllList();
+    display();
+
+    let modalElement = document.getElementById("addcontact");
+    let modalInstance = bootstrap.Modal.getInstance(modalElement);
+    if (modalInstance) {
+      modalInstance.hide();
+    }
+
+    Swal.fire({
+      icon: "success",
+      title: "Update Done",
+      text: "تم تحديث البيانات بنجاح",
+      timer: 1500,
+      showConfirmButton: false,
+    });
+  } else {
+    let errorMsg = "";
+    if (!isNameValid) errorMsg = "يرجى كتابة الاسم بشكل صحيح (3 حروف فأكثر).";
+    else if (!isEmailValid) errorMsg = "يرجى التأكد من صيغة البريد الإلكتروني.";
+    else if (!isPhoneValid) errorMsg = "يرجى إدخال رقم هاتف مصري صحيح.";
+
+    Swal.fire({
+      icon: "error",
+      title: "بيانات غير صالحة",
+      text: errorMsg,
+      confirmButtonText: "حسناً",
+      confirmButtonColor: "#7066e0",
+    });
+  }
 }
 
 function deleteContact(id) {
@@ -543,5 +654,44 @@ function deleteContact(id) {
     });
 }
 
-///----------------------  init --------------------------
+let nameRegex = /^[A-Za-z\u0621-\u064A\s]{3,}$/;
+let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+let phoneRegex = /^01[0-2,5]\d{8}$/;
+
+fullName.addEventListener("input", vaildationName);
+
+
+
+
+
+function vaildationName() {
+  if (nameRegex.test(fullName.value)) {
+    fullName.nextElementSibling.classList.replace("d-block", "d-none");
+    return true;
+  } else {
+    fullName.nextElementSibling.classList.replace("d-none", "d-block");
+    return false;
+  }
+}
+emailAddress.addEventListener("input", vaildationEmail);
+function vaildationEmail() {
+  if (emailRegex.test(emailAddress.value)) {
+    emailAddress.nextElementSibling.classList.replace("d-block", "d-none");
+    return true;
+  } else {
+    emailAddress.nextElementSibling.classList.replace("d-none", "d-block");
+    return false;
+  }
+}
+phoneNumber.addEventListener("input", vaildationPhoneNumber);
+function vaildationPhoneNumber() {
+  if (phoneRegex.test(phoneNumber.value)) {
+    phoneNumber.nextElementSibling.classList.replace("d-block", "d-none");
+    return true;
+  } else {
+    phoneNumber.nextElementSibling.classList.replace("d-none", "d-block");
+    return false;
+  }
+}
+
 getAndCheckLocalStorage();
