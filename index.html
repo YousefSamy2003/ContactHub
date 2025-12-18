@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../CSS/style.css" />
-    <link rel="stylesheet" href="../CSS/bootstrap.css" />
+    <link rel="stylesheet" href="CSS/style.css" />
+    <link rel="stylesheet" href="CSS/bootstrap.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -35,7 +35,7 @@
               <span style="font-size: 24px; font-weight: 700"
                 >Contact <span style="color: var(--main-color)">Hub</span>
               </span>
-              <p>Smart Contact Manager</p>
+              <p  class="d-none d-lg-block">Smart Contact Manager</p>
             </div>
           </div>
           <div class="right-nav">
@@ -43,7 +43,7 @@
             <div class="d-flex align-items-center gap-3">
               <button
                 type="button"
-                class="btn py-2 rounded-4 add-contant"
+                class="btn py-2 rounded-4 add-contant "
                 style="
                   background-color: var(--main-color);
                   color: #fff;
@@ -53,7 +53,7 @@
                 data-bs-target="#addcontact"
               >
                 <i class="fa-solid fa-plus me-2" style="font-size: 13px"></i
-                ><span class="">Add Contact</span>
+                ><span >Add <span class="d-none d-lg-inline">Contact</span></span>
               </button>
               <button class="button-icon d-none d-md-block">
                 <i class="fa-solid fa-bell"></i>
@@ -133,7 +133,7 @@
                         type="text"
                         id="fullName"
                         class="form-control"
-                        required
+                     
                       />
                       <div id="nameHelpBlock" class="d-none form-text text-danger">
                         Name should contain only letters and spaces (2-50
@@ -147,7 +147,7 @@
                         id="phoneNumber"
                         class="form-control"
                         placeholder="01003849368"
-                        required
+                      
                       />
                       <div id="phoneHelpBlock" class="d-none form-text text-danger">
                         Please enter a valid Egyptian phone number
@@ -159,7 +159,7 @@
                         type="email"
                         id="emailAddress"
                         class="form-control"
-                        required
+                     
                       />
                       <div id="emailHelpBlock" class="d-none form-text text-danger">
                         Please enter a valid email address
@@ -430,9 +430,9 @@
       </section>
     </main>
 
-    <script src="../JS/bootstrap.bundle.min.js"></script>
+    <script src="JS/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="../JS/main.js"></script>
+    <script src="JS/main.js"></script>
   </body>
 </html>

@@ -234,39 +234,46 @@ section {
   }
 }
 .fav-list {
-      box-shadow: 0px 1px rgba(128, 128, 128, 0.224);
+  box-shadow: 0px 1px rgba(128, 128, 128, 0.224);
 }
 .top-fav {
-    background-color:#FFF9EC ;
-    .icon {
-        width: 50px;
-        height: 50px;
-    }
+  background-color: #fff9ec;
+  .icon {
+    width: 50px;
+    height: 50px;
+  }
 }
 .icon-inside {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 .top-EME {
-    background-color:#FEF2F2;
-    .icon {
-        width: 50px;
-        height: 50px;
-    }
+  background-color: #fef2f2;
+  .icon {
+    width: 50px;
+    height: 50px;
+  }
 }
 .icon-inside {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
-.for-hover-emerg{
-    
-&:hover {
-    background-color: #FFF1F2;
+.for-hover-emerg {
+  &:hover {
+    background-color: #fff1f2;
+  }
 }
+.for-hover-fav {
+  &:hover {
+    background-color: #fff8ed;
+  }
 }
-.for-hover-fav{
-    
-&:hover {
-    background-color: #FFF8ED;
-}
+
+@media (max-width: 800px) {
+  nav {
+    padding-block: 20px;
+  }
+  section {
+    padding-block: 0px;
+  }
 }
