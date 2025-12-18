@@ -259,7 +259,9 @@ function display() {
             <i class="fa-solid fa-pen"></i>
           </button>
 
-          <button class="button-icon delete">
+          <button class="button-icon delete"  onclick="deleteContact(${
+            allContactList[i].id
+          })">
             <i class="fa-solid fa-trash"></i>
           </button>
         </div>
@@ -401,7 +403,7 @@ function handleFav(id) {
   display();
 }
 function handleEmerg(id) {
-  GlobalIndexForUpdate = allContactList.findIndex(
+  let index = allContactList.findIndex(
     (allContactList) => allContactList.id === id
   );
   allContactList[index].emergency = !allContactList[index].emergency;
@@ -472,5 +474,56 @@ function updateContact() {
   display();
 }
 
+
+
+function deleteContact(id) {
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: "btn btn-success",
+      cancelButton: "btn btn-danger",
+    },
+    buttonsStyling: false,
+  });
+
+  swalWithBootstrapButtons
+    .fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+      reverseButtons: true,
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        let index = allContactList.findIndex(
+          (allContactList) => allContactList.id === id
+        );
+        allContactList.splice(index, 1);
+        storeInLocalStorage();
+        getEmergencyList();
+        displayEmergency();
+        getFavoritesList();
+        displayFavorites();
+        getTotalNumberForAllList();
+        display();
+
+        swalWithBootstrapButtons.fire(
+          "Deleted!",
+          "The contact has been deleted.",
+          "success"
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        swalWithBootstrapButtons.fire(
+          "Cancelled",
+          "The contact is safe :)",
+          "error"
+        );
+      }
+    });
+}
+
 ///----------------------  init --------------------------
 getAndCheckLocalStorage();
+
