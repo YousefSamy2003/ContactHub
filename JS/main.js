@@ -11,6 +11,9 @@ let imageContact = document.getElementById("imageContact");
 let rowContact = document.getElementById("rowContact");
 let favRow = document.getElementById("favRow");
 let emergRow = document.getElementById("emergRow");
+
+let searchInput = document.getElementById("searchInput");
+
 let totalNumber = {
   totalList: document.getElementById("totalList"),
   totalFav: document.getElementById("totalFav"),
@@ -19,6 +22,7 @@ let totalNumber = {
 let allContactList = [];
 let favoritesList = [];
 let emergencyList = [];
+let listForSearch = [];
 let currentImage = "";
 
 let GlobalIndexForUpdate;
@@ -47,6 +51,27 @@ imageContact.addEventListener("change", function () {
     currentImage = e.target.result;
   };
   reader.readAsDataURL(file);
+});
+
+searchInput.addEventListener("input", function () {
+  listForSearch = [];
+
+  for (let i = 0; i < allContactList.length; i++) {
+    if (
+      allContactList[i].fullName
+        .toLowerCase()
+        .includes(searchInput.value.toLowerCase()) ||
+      allContactList[i].phoneNumber
+        .toLowerCase()
+        .includes(searchInput.value.toLowerCase()) ||
+      allContactList[i].emailAddress
+        .toLowerCase()
+        .includes(searchInput.value.toLowerCase())
+    ) {
+      listForSearch.push(allContactList[i]);
+    }
+  }
+  display(listForSearch);
 });
 
 //              functions
@@ -118,9 +143,9 @@ function getTotalNumberForAllList() {
   totalNumber.totalFav.innerHTML = favoritesList.length;
   totalNumber.totalEmerg.innerHTML = emergencyList.length;
 }
-function display() {
+function display(list = allContactList) {
   let box = "";
-  for (let i = 0; i < allContactList.length; i++) {
+  for (let i = 0; i < list.length; i++) {
     box += `
 <div class="col-md-6">
   <div class="p-3">
@@ -134,22 +159,22 @@ function display() {
 
           <!-- favorite -->
         <!-- favorite -->
-<span class="fav-icon ${allContactList[i].favorite ? "d-flex" : "d-none"}">
+<span class="fav-icon ${list[i].favorite ? "d-flex" : "d-none"}">
   <i class="fa-solid fa-star"></i>
 </span>
 
 <!-- emergency -->
-<span class="emerg-icon ${allContactList[i].emergency ? "d-flex" : "d-none"}">
+<span class="emerg-icon ${list[i].emergency ? "d-flex" : "d-none"}">
   <i class="fa-solid fa-heart-pulse"></i>
 </span>
 
 
           <!-- image or initials -->
           ${
-            allContactList[i].imageContact
-              ? `<img src="${allContactList[i].imageContact}" class="img-fluid rounded-3" alt="">`
+            list[i].imageContact
+              ? `<img src="${list[i].imageContact}" class="img-fluid rounded-3" alt="">`
               : `<span class="text-white fw-bold">
-                  ${allContactList[i].fullName
+                  ${list[i].fullName
                     .split(" ")
                     .join("")
                     .slice(0, 2)
@@ -159,7 +184,7 @@ function display() {
         </span>
 
         <div class="d-flex flex-column px-3">
-          <span class="fw-bold">${allContactList[i].fullName}</span>
+          <span class="fw-bold">${list[i].fullName}</span>
 
           <span class="d-flex align-items-center">
             <span
@@ -169,7 +194,7 @@ function display() {
               <i class="fa-solid fa-phone text-primary"></i>
             </span>
             <span class="fw-bold px-2 text-secondary">
-              ${allContactList[i].phoneNumber}
+              ${list[i].phoneNumber}
             </span>
           </span>
         </div>
@@ -184,7 +209,7 @@ function display() {
           <i class="fa-solid fa-envelope"></i>
         </span>
         <span class="text-secondary px-2">
-          ${allContactList[i].emailAddress}
+          ${list[i].emailAddress}
         </span>
       </div>
 
@@ -197,13 +222,13 @@ function display() {
           <i class="fa-solid fa-location-dot"></i>
         </span>
         <span class="text-secondary px-2" style="font-size:12px">
-          ${allContactList[i].address}
+          ${list[i].address}
         </span>
       </div>
 
       <!-- emergency badge -->
       ${
-        allContactList[i].emergency
+        list[i].emergency
           ? `<div class="p-2 badge bg-light">
                <span class="text-danger">
                  <i class="fa-solid fa-heart-pulse"></i>
@@ -221,32 +246,30 @@ function display() {
       >
         <div class="d-flex gap-2">
           <span class="button-icon telphone-icon">
-            <a href="tel:${allContactList[i].phoneNumber}">
+            <a href="tel:${list[i].phoneNumber}">
               <i class="fa-solid fa-phone"></i>
             </a>
           </span>
 
           <span class="button-icon mail-icon">
-            <a href="mailto:${allContactList[i].emailAddress}">
+            <a href="mailto:${list[i].emailAddress}">
               <i class="fa-solid fa-envelope"></i>
             </a>
           </span>
         </div>
 
         <div class="d-flex gap-2">
-          <span class="button-icon fav-icon" onclick="handleFav(${
-            allContactList[i].id
-          })">
+          <span class="button-icon fav-icon" onclick="handleFav(${list[i].id})">
             <i class="fa-solid fa-star ${
-              allContactList[i].favorite ? "text-warning" : ""
+              list[i].favorite ? "text-warning" : ""
             }"  ></i>
           </span>
 
           <span class="button-icon emerg-icon" onclick="handleEmerg(${
-            allContactList[i].id
+            list[i].id
           })">
             <i class="fa-solid fa-heart-pulse ${
-              allContactList[i].emergency ? "text-danger" : ""
+              list[i].emergency ? "text-danger" : ""
             }"    ></i>
           </span>
 
@@ -254,13 +277,13 @@ function display() {
             class="button-icon edit"
             data-bs-toggle="modal"
             data-bs-target="#addcontact"
-            onclick="updateUploadToForm(${allContactList[i].id})"
+            onclick="updateUploadToForm(${list[i].id})"
           >
             <i class="fa-solid fa-pen"></i>
           </button>
 
           <button class="button-icon delete"  onclick="deleteContact(${
-            allContactList[i].id
+            list[i].id
           })">
             <i class="fa-solid fa-trash"></i>
           </button>
@@ -390,9 +413,7 @@ function displayEmergency() {
 }
 
 function handleFav(id) {
-  let index = allContactList.findIndex(
-    (allContactList) => allContactList.id === id
-  );
+  let index = list.findIndex((allContactList) => allContactList.id === id);
   allContactList[index].favorite = !allContactList[index].favorite;
   storeInLocalStorage();
   getEmergencyList();
@@ -474,8 +495,6 @@ function updateContact() {
   display();
 }
 
-
-
 function deleteContact(id) {
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
@@ -526,4 +545,3 @@ function deleteContact(id) {
 
 ///----------------------  init --------------------------
 getAndCheckLocalStorage();
-
