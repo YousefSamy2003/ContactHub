@@ -7,13 +7,10 @@ let emergency = document.getElementById("emergency");
 let favorite = document.getElementById("favorite");
 let address = document.getElementById("address");
 let imageContact = document.getElementById("imageContact");
-
 let rowContact = document.getElementById("rowContact");
 let favRow = document.getElementById("favRow");
 let emergRow = document.getElementById("emergRow");
-
 let searchInput = document.getElementById("searchInput");
-
 let totalNumber = {
   totalList: document.getElementById("totalList"),
   totalFav: document.getElementById("totalFav"),
@@ -24,10 +21,16 @@ let favoritesList = [];
 let emergencyList = [];
 let listForSearch = [];
 let currentImage = "";
-
 let GlobalIndexForUpdate;
 
-///  events
+//             regularExpression
+let regularExpression = {
+  fullName: /^[A-Za-z\u0621-\u064A\s]{3,}$/,
+  emailAddress: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+  phoneNumber: /^01[0125]\d{8}$/,
+};
+
+///                                    ALL           Events
 
 document.forms[0].addEventListener("submit", function (e) {
   e.preventDefault();
@@ -38,7 +41,7 @@ document.forms[0].addEventListener("submit", function (e) {
   displayEmergency();
 });
 
-///getImageAndImagePrev
+///                             getImageAndImagePrev
 imageContact.addEventListener("change", function () {
   var imagePreview = document.querySelector("#imagePreview");
   var file = imageContact.files[0];
@@ -74,7 +77,19 @@ searchInput.addEventListener("input", function () {
   display(listForSearch);
 });
 
-//              functions
+// F        O         R                   V    a   i    l d  a    t    i    o    n
+fullName.addEventListener("input", function () {
+  vaildationName(fullName);
+});
+
+emailAddress.addEventListener("input", function () {
+  vaildationName(emailAddress);
+});
+phoneNumber.addEventListener("input", function () {
+  vaildationName(phoneNumber);
+});
+
+//             ALL            functions
 
 function getData() {
   let isNameValid = vaildationName(fullName);
@@ -652,22 +667,6 @@ function deleteContact(id) {
       }
     });
 }
-
-let regularExpression = {
-  fullName: /^[A-Za-z\u0621-\u064A\s]{3,}$/,
-  emailAddress: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-  phoneNumber: /^01[0125]\d{8}$/,
-};
-fullName.addEventListener("input", function () {
-  vaildationName(fullName);
-});
-
-emailAddress.addEventListener("input", function () {
-  vaildationName(emailAddress);
-});
-phoneNumber.addEventListener("input", function () {
-  vaildationName(phoneNumber);
-});
 
 function vaildationName(input) {
   if (regularExpression[input.id].test(input.value)) {
