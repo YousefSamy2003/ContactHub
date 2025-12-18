@@ -77,9 +77,9 @@ searchInput.addEventListener("input", function () {
 //              functions
 
 function getData() {
-  let isNameValid = vaildationName();
-  let isEmailValid = vaildationEmail();
-  let isPhoneValid = vaildationPhoneNumber();
+  let isNameValid = vaildationName(fullName);
+  let isEmailValid = vaildationName(emailAddress);
+  let isPhoneValid = vaildationName(phoneNumber);
 
   if (isNameValid && isEmailValid && isPhoneValid) {
     let isDuplicate = allContactList.some(
@@ -522,10 +522,9 @@ function updateUploadToForm(id) {
 }
 
 function updateContact() {
-  let isNameValid = vaildationName();
-  let isEmailValid = vaildationEmail();
-  let isPhoneValid = vaildationPhoneNumber();
-
+  let isNameValid = vaildationName(fullName);
+  let isEmailValid = vaildationName(emailAddress);
+  let isPhoneValid = vaildationName(phoneNumber);
   if (isNameValid && isEmailValid && isPhoneValid) {
     let isDuplicate = allContactList.some((contact, index) => {
       return (
@@ -654,44 +653,50 @@ function deleteContact(id) {
     });
 }
 
-let nameRegex = /^[A-Za-z\u0621-\u064A\s]{3,}$/;
-let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-let phoneRegex = /^01[0-2,5]\d{8}$/;
+let regularExpression = {
+  fullName: /^[A-Za-z\u0621-\u064A\s]{3,}$/,
+  emailAddress: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+  phoneNumber: /^01[0125]\d{8}$/,
+};
+fullName.addEventListener("input", function () {
+  vaildationName(fullName);
+});
 
-fullName.addEventListener("input", vaildationName);
+emailAddress.addEventListener("input", function () {
+  vaildationName(emailAddress);
+});
+phoneNumber.addEventListener("input", function () {
+  vaildationName(phoneNumber);
+});
 
-
-
-
-
-function vaildationName() {
-  if (nameRegex.test(fullName.value)) {
-    fullName.nextElementSibling.classList.replace("d-block", "d-none");
+function vaildationName(input) {
+  if (regularExpression[input.id].test(input.value)) {
+    input.nextElementSibling.classList.replace("d-block", "d-none");
     return true;
   } else {
-    fullName.nextElementSibling.classList.replace("d-none", "d-block");
+    input.nextElementSibling.classList.replace("d-none", "d-block");
     return false;
   }
 }
-emailAddress.addEventListener("input", vaildationEmail);
-function vaildationEmail() {
-  if (emailRegex.test(emailAddress.value)) {
-    emailAddress.nextElementSibling.classList.replace("d-block", "d-none");
-    return true;
-  } else {
-    emailAddress.nextElementSibling.classList.replace("d-none", "d-block");
-    return false;
-  }
-}
-phoneNumber.addEventListener("input", vaildationPhoneNumber);
-function vaildationPhoneNumber() {
-  if (phoneRegex.test(phoneNumber.value)) {
-    phoneNumber.nextElementSibling.classList.replace("d-block", "d-none");
-    return true;
-  } else {
-    phoneNumber.nextElementSibling.classList.replace("d-none", "d-block");
-    return false;
-  }
-}
+
+// function vaildationEmail() {
+//   if (emailRegex.test(emailAddress.value)) {
+//     emailAddress.nextElementSibling.classList.replace("d-block", "d-none");
+//     return true;
+//   } else {
+//     emailAddress.nextElementSibling.classList.replace("d-none", "d-block");
+//     return false;
+//   }
+// }
+
+// function vaildationPhoneNumber() {
+//   if (phoneRegex.test(phoneNumber.value)) {
+//     phoneNumber.nextElementSibling.classList.replace("d-block", "d-none");
+//     return true;
+//   } else {
+//     phoneNumber.nextElementSibling.classList.replace("d-none", "d-block");
+//     return false;
+//   }
+// }
 
 getAndCheckLocalStorage();
