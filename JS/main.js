@@ -32,9 +32,6 @@ let regularExpression = {
 
 ///                                    ALL           Events
 
-document.forms[0].addEventListener("submit", function (e) {
-  e.preventDefault();
-});
 document.getElementById("mainButton").addEventListener("click", function (e) {
   getData();
   getFavoritesList();
