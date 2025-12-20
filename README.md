@@ -36,6 +36,8 @@ That's it! No installation needed.
 ## 📸 Screenshots
 
 <img width="1241" height="623" alt="image" src="https://github.com/user-attachments/assets/fd1aedb5-36b2-4862-95cf-946d4dbfd62b" />
+<img width="1551" height="892" alt="image" src="https://github.com/user-attachments/assets/841a2ea9-eee5-41d9-a060-1cbf63ba1a72" />
+<img width="503" height="913" alt="image" src="https://github.com/user-attachments/assets/dad4f36f-7f3c-496a-b378-4444b83a5651" />
 
 
 ## 👨‍💻 Author
